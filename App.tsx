@@ -24,95 +24,60 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import CustomInput from './src/CustomInput';
+import CustomButton from './src/CustomButton';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
+export const orangeColor = '#E74218';
 
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
+  const InputList = [
+    {
+      title: 'Name',
+      placeholder: 'Jonh Doe',
+    },
+    {
+      title: 'Mail',
+      placeholder: 'abc@gmail.com',
+      isEmail: true,
+    },
+    {
+      title: 'Password',
+      placeholder: '*****',
+    },
+    {
+      title: 'RetypePassword',
+      placeholder: '*****',
+    },
+  ];
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
+    <SafeAreaView style={{backgroundColor: 'white'}}>
+      <View style={{marginTop: 50}}>
+        <Text
           style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
+            textAlign: 'center',
+            color: orangeColor,
+            fontSize: 22,
+            fontWeight: 'bold',
           }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+          Join Active eCommerce
+        </Text>
+        <View style={{margin: 20}}>
+          {InputList.map((input, index) => (
+            <CustomInput
+              key={index}
+              label={input.title}
+              placeholder={input.placeholder}
+              isEmail={input.isEmail}
+            />
+          ))}
+          <CustomButton label={'SignUp'} colorCode={orangeColor} />
+          <CustomButton label={'Login'} colorCode={'#F8B550'} />
         </View>
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+const styles = StyleSheet.create({});
 
 export default App;
