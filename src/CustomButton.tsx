@@ -1,14 +1,17 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Alert, Dimensions, Text, TouchableOpacity, View} from 'react-native';
 
 type ButtomType = {
   label: string;
   colorCode: string;
+  onPress: (val: string) => void;
 };
 
-const CustomButton: React.FC<ButtomType> = ({label, colorCode}) => {
+const CustomButton: React.FC<ButtomType> = ({label, colorCode, onPress}) => {
+  const {width, height} = Dimensions.get('window');
   return (
-    <View
+    <TouchableOpacity
+      onPress={() => onPress(label)}
       style={{
         height: 68,
         borderRadius: 10,
@@ -18,7 +21,7 @@ const CustomButton: React.FC<ButtomType> = ({label, colorCode}) => {
         justifyContent: 'center',
       }}>
       <Text style={{color: 'white', fontWeight: 'bold'}}>{label}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 
