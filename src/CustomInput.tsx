@@ -25,7 +25,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
         keyboardType={'numeric'} // sử dugj cho Oclock
         placeholder={placeholder}
         onChangeText={changeText}
-        maxLength={2} //chỉ sử dụng cho Oclock
+        // maxLength={2} //chỉ sử dụng cho Oclock
         value={value}
         style={{
           borderWidth: 0.5,
